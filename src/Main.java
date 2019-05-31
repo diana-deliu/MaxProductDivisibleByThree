@@ -7,26 +7,23 @@ import java.util.List;
 public class Main {
 
     public static void main(String... args) {
-        List<Integer> numbers = Arrays.asList(99, 81, 5, 3, 102);
+        List<Integer> numbers = Arrays.asList(1, 0, 53, 55, 5, 53);
         System.out.println(computeMaxProductWhichDividesByThree(numbers));
     }
 
     public static int computeMaxProductWhichDividesByThree(List<Integer> numbers) {
-        int max = 0;
-        int secondMax = 0;
+        int maxDivByThree = -1000;
+        int max = -1000;
 
         for (Integer number : numbers) {
-            if (number > max) {
-                if (max % 3 == 0 && number > secondMax) {
-                    secondMax = max;
-                }
+            if (number > maxDivByThree && number % 3 == 0) {
+                max = maxDivByThree;
+                maxDivByThree = number;
+            } else if (number > max ) {
                 max = number;
-            } else {
-                if (number % 3 == 0 && number > secondMax) {
-                    secondMax = number;
-                }
             }
         }
-        return max * secondMax;
+
+        return maxDivByThree * max;
     }
 }
